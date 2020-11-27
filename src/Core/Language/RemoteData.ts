@@ -33,6 +33,9 @@ export const success = <V>(value: V): Success<V> => ({
   value,
 });
 
+export const isSuccess = <F, S>(data: RemoteData<F, S>): data is Success<S> =>
+  data.kind === "Success";
+
 export const fromEither = <L, R>(
   either: Either.Type<L, R>
 ): RemoteData<L, R> => {
