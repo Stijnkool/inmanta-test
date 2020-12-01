@@ -4,26 +4,25 @@ import "./index.css";
 import { App } from "App";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
+import { RemoteRouterRepository } from "Infrastructure";
+import { ServiceBundle, ServiceContext } from "UserInterface";
+import { initRouters } from "features/routers/routerSlice";
 
 const API_URL = "http://0.0.0.0:8080/";
 
-console.log(getData());
+const serviceBundle: ServiceBundle = {
+  routerRepository: new RemoteRouterRepository(API_URL),
+};
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ServiceContext.Provider value={serviceBundle}>
+        <App />
+      </ServiceContext.Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-async function getData(): Promise<unknown> {
-  try {
-    const response = await fetch(API_URL);
-    const json = response.json();
-    return json;
-  } catch (e) {
-    return e;
-  }
-}
+store.dispatch(initRouters(serviceBundle.routerRepository));

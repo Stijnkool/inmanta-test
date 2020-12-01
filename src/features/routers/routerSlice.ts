@@ -1,7 +1,7 @@
 import { RemoteData } from "Core/Language";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "../../app/store";
-import { routerRepository } from "deps";
+import { RouterRepository } from "Core";
 
 interface RoutersState {
   data: RemoteData.Type<string, string[]>;
@@ -23,11 +23,9 @@ export const { set } = routersSlice.actions;
 
 export const selectData = (state: RootState) => state.routers.data;
 
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched
-export const initRouters = (): AppThunk => async (dispatch) => {
+export const initRouters = (
+  routerRepository: RouterRepository
+): AppThunk => async (dispatch) => {
   dispatch(set(RemoteData.loading()));
   const routers = await routerRepository.getRouters();
   dispatch(set(RemoteData.fromEither(routers)));
