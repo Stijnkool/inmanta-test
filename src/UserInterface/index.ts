@@ -1,3 +1,5 @@
 export * from "./RouterRepositoryContext";
-export * from "./RootProvider";
+export * from "./Root";
 export * from "./GlobalStyle";
+export * from "./store";
+export * from "./Root";

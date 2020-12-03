@@ -8,7 +8,7 @@ export class RemoteRouterRepository implements RouterRepository {
     try {
       const response = await fetch(`${this.apiRoot}/`);
       const json = await response.json();
-      return Either.right([json[0]]);
+      return Either.right(json);
     } catch (e) {
       return Either.left(e.message);
     }

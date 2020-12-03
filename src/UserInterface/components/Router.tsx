@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
-import { RouterProps } from "./RouterProvider";
+import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
+import { toggleWithFetch } from "UserInterface/slices";
+import { useAppDispatch } from "UserInterface/store";
+import { Router as RouterType } from "UserInterface/slices";
+import { Details } from "./Details";
 
-export interface DetailsProviderProps {
-  router: string;
-  open: boolean;
+interface Props {
+  router: RouterType;
 }
 
-interface Props extends RouterProps {
-  DetailsProvider: React.FC<DetailsProviderProps>;
-}
+export const Router: React.FC<Props> = ({ router }) => {
+  const dispatch = useAppDispatch();
+  const routerRepository = useContext(RouterRepositoryContext);
 
-export const Router: React.FC<Props> = ({
-  name,
-  open,
-  onClick,
-  DetailsProvider,
-}) => (
-  <Container onClick={onClick}>
-    {name}
-    <span>{open ? "open" : "closed"}</span>
-    <DetailsProvider open={open} router={name} />
-  </Container>
-);
+  const clickHandler = useCallback(
+    () => dispatch(toggleWithFetch(routerRepository, router.id)),
+    [dispatch, routerRepository, router]
+  );
+
+  return (
+    <Container onClick={clickHandler}>
+      {router.id}
+      <span>{router.open ? "open" : "closed"}</span>
+      {router.open && (
+        <Details routerId={router.id} interfaces={router.interfaces} />
+      )}
+    </Container>
+  );
+};
 
 const Container = styled.div`
   cursor: pointer;
