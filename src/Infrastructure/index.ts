@@ -1,2 +1,1 @@
-export * from "./InMemoryRouterRepository";
-export * from "./RemoteRouterRepository";
+export * from "./RouterRepository";

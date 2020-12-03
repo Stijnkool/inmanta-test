@@ -1,5 +1,5 @@
 import React from "react";
-import { InMemoryRouterRepository } from "Infrastructure";
+import { SuccessRouterRepository } from "Infrastructure";
 import { RouterRepository } from "Core";
 
 export interface ServiceBundle {
@@ -7,5 +7,5 @@ export interface ServiceBundle {
 }
 
 export const ServiceContext = React.createContext<ServiceBundle>({
-  routerRepository: new InMemoryRouterRepository(),
+  routerRepository: new SuccessRouterRepository(["fake"]),
 });

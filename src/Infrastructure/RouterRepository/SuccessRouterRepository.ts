@@ -1,8 +1,10 @@
 import { RouterRepository } from "Core";
 import { Either } from "Core/Language";
 
-export class InMemoryRouterRepository implements RouterRepository {
+export class SuccessRouterRepository implements RouterRepository {
+  constructor(private routers: string[]) {}
+
   async getRouters(): Promise<Either.Type<string, string[]>> {
-    return Either.right(["cloud1", "cloud2"]);
+    return Either.right(this.routers);
   }
 }
