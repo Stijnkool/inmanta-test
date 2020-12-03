@@ -6,6 +6,7 @@ import {
   RouterRepositoryContext,
   store,
 } from "UserInterface";
+import "./normalize.css";
 import { RemoteRouterRepository } from "Infrastructure";
 import { Provider } from "react-redux";
 import { initRouters } from "UserInterface/slices";

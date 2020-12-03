@@ -20,9 +20,11 @@ export const Router: React.FC<Props> = ({ router }) => {
   );
 
   return (
-    <Container onClick={clickHandler}>
-      {router.id}
-      <span>{router.open ? "open" : "closed"}</span>
+    <Container>
+      <TitleBar onClick={clickHandler}>
+        <Title>{router.id}</Title>
+        <Toggle>{router.open ? "∧" : "∨"} </Toggle>
+      </TitleBar>
       {router.open && (
         <Details routerId={router.id} interfaces={router.interfaces} />
       )}
@@ -31,11 +33,32 @@ export const Router: React.FC<Props> = ({ router }) => {
 };
 
 const Container = styled.div`
-  cursor: pointer;
   padding: 16px;
   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 
   :last-child {
     border-bottom: none;
   }
+`;
+
+const Title = styled.span`
+  font-size: 16px;
+  align-self: center;
+`;
+
+const TitleBar = styled.div`
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 8px;
+`;
+
+const Toggle = styled.button`
+  width: 16px;
+  border: none;
+  font-size: 18px;
+  padding: 8px;
+  background: none;
+  box-sizing: content-box;
+  user-select: none;
 `;
