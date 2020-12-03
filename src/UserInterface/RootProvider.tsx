@@ -1,6 +1,6 @@
 import React, { ReactElement, useContext, useEffect, useState } from "react";
 import { RemoteData } from "Core/Language";
-import { ServiceContext } from "UserInterface";
+import { RouterRepositoryContext } from "UserInterface";
 
 interface Props {
   Loading: React.FC;
@@ -12,18 +12,18 @@ export const RootProvider: React.FC<Props> = ({ Loading, Failed, Success }) => {
   const [data, setData] = useState<RemoteData.Type<string, string[]>>(
     RemoteData.notAsked()
   );
-  const { routerRepository } = useContext(ServiceContext);
+
+  const routerRepository = useContext(RouterRepositoryContext);
 
   useEffect(() => {
     if (!RemoteData.isNotAsked(data)) return;
     setData(RemoteData.loading());
+    fetchData();
 
-    const getData = async () => {
+    async function fetchData() {
       const result = await routerRepository.getRouters();
       setData(RemoteData.fromEither(result));
-    };
-
-    getData();
+    }
   }, [data, routerRepository]);
 
   return RemoteData.fold<string, string[], ReactElement | null>({

@@ -2,25 +2,42 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { GlobalStyle, RootProvider } from "UserInterface";
 import { RemoteRouterRepository } from "Infrastructure";
-import { ServiceBundle, ServiceContext } from "UserInterface";
-import { Failed, Loading, RouterProvider } from "UserInterface/components";
+import { RouterRepositoryContext } from "UserInterface";
+import {
+  Details,
+  DetailsProvider,
+  Failed,
+  Loading,
+  Router,
+  RouterProvider,
+} from "UserInterface/components";
 
-const API_URL = "http://0.0.0.0:8080/";
+const API_URL = "http://0.0.0.0:8080";
 
-const serviceBundle: ServiceBundle = {
-  routerRepository: new RemoteRouterRepository(API_URL),
-};
+const routerRepository = new RemoteRouterRepository(API_URL);
 
 ReactDOM.render(
   <React.StrictMode>
-    <ServiceContext.Provider value={serviceBundle}>
+    <RouterRepositoryContext.Provider value={routerRepository}>
       <GlobalStyle />
       <RootProvider
         Loading={Loading}
         Failed={Failed}
-        Success={RouterProvider}
+        Success={({ routers }) => (
+          <RouterProvider
+            routers={routers}
+            Router={(props) => (
+              <Router
+                {...props}
+                DetailsProvider={(props) => (
+                  <DetailsProvider {...props} Details={Details} />
+                )}
+              />
+            )}
+          />
+        )}
       />
-    </ServiceContext.Provider>
+    </RouterRepositoryContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

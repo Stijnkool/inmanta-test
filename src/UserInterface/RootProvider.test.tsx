@@ -6,7 +6,7 @@ import {
 import React from "react";
 import ReactDOM, { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-import { RootProvider, ServiceContext } from "UserInterface";
+import { RootProvider, RouterRepositoryContext } from "UserInterface";
 
 let container: any = null;
 
@@ -36,15 +36,13 @@ it("renders without crashing", () => {
 it("renders Loading", async () => {
   await act(async () => {
     ReactDOM.render(
-      <ServiceContext.Provider
-        value={{ routerRepository: new LoadingRouterRepository() }}
-      >
+      <RouterRepositoryContext.Provider value={new LoadingRouterRepository()}>
         <RootProvider
           Loading={() => <div>loading</div>}
           Failed={Empty}
           Success={Empty}
         />
-      </ServiceContext.Provider>,
+      </RouterRepositoryContext.Provider>,
       container
     );
   });
@@ -55,15 +53,15 @@ it("renders Loading", async () => {
 it("renders Failed", async () => {
   await act(async () => {
     ReactDOM.render(
-      <ServiceContext.Provider
-        value={{ routerRepository: new FailedRouterRepository("failed") }}
+      <RouterRepositoryContext.Provider
+        value={new FailedRouterRepository("failed")}
       >
         <RootProvider
           Loading={Empty}
           Failed={({ error }) => <div>{error}</div>}
           Success={Empty}
         />
-      </ServiceContext.Provider>,
+      </RouterRepositoryContext.Provider>,
       container
     );
   });
@@ -74,15 +72,15 @@ it("renders Failed", async () => {
 it("renders Success", async () => {
   await act(async () => {
     ReactDOM.render(
-      <ServiceContext.Provider
-        value={{ routerRepository: new SuccessRouterRepository(["cloud1"]) }}
+      <RouterRepositoryContext.Provider
+        value={new SuccessRouterRepository(["cloud1"], ["eth0"])}
       >
         <RootProvider
           Loading={Empty}
           Failed={Empty}
           Success={({ routers }) => <>{routers[0]}</>}
         />
-      </ServiceContext.Provider>,
+      </RouterRepositoryContext.Provider>,
       container
     );
   });

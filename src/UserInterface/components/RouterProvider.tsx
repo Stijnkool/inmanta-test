@@ -1,8 +1,14 @@
 import React, { useState } from "react";
-import { Router } from "./Router";
+
+export interface RouterProps {
+  name: string;
+  open: boolean;
+  onClick(): void;
+}
 
 interface Props {
   routers: string[];
+  Router: React.FC<RouterProps>;
 }
 
 interface Toggle {
@@ -21,7 +27,7 @@ function initToggles(names: string[]): Toggles {
   return toggles;
 }
 
-export const RouterProvider: React.FC<Props> = ({ routers }) => {
+export const RouterProvider: React.FC<Props> = ({ routers, Router }) => {
   const [toggles, setToggles] = useState<Toggles>(initToggles(routers));
 
   const openAll = () => {
@@ -32,6 +38,13 @@ export const RouterProvider: React.FC<Props> = ({ routers }) => {
     setToggles(newToggles);
   };
 
+  const triggerToggle = (router: string) => () => {
+    setToggles({
+      ...toggles,
+      [router]: { open: !toggles[router].open },
+    });
+  };
+
   return (
     <div>
       <button onClick={openAll}>Open All</button>
@@ -40,12 +53,7 @@ export const RouterProvider: React.FC<Props> = ({ routers }) => {
           key={router}
           name={router}
           open={toggles[router].open}
-          onClick={() =>
-            setToggles({
-              ...toggles,
-              [router]: { open: !toggles[router].open },
-            })
-          }
+          onClick={triggerToggle(router)}
         />
       ))}
     </div>

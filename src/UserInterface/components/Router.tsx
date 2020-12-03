@@ -1,16 +1,26 @@
 import React from "react";
 import styled from "styled-components";
+import { RouterProps } from "./RouterProvider";
 
-interface Props {
-  name: string;
+export interface DetailsProviderProps {
+  router: string;
   open: boolean;
-  onClick(): void;
 }
 
-export const Router: React.FC<Props> = ({ name, open, onClick }) => (
+interface Props extends RouterProps {
+  DetailsProvider: React.FC<DetailsProviderProps>;
+}
+
+export const Router: React.FC<Props> = ({
+  name,
+  open,
+  onClick,
+  DetailsProvider,
+}) => (
   <Container onClick={onClick}>
     {name}
     <span>{open ? "open" : "closed"}</span>
+    <DetailsProvider open={open} router={name} />
   </Container>
 );
 

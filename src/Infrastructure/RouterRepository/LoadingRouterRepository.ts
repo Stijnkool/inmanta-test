@@ -5,4 +5,8 @@ export class LoadingRouterRepository implements RouterRepository {
   getRouters(): Promise<Either.Type<string, string[]>> {
     return new Promise(() => {});
   }
+
+  getInterfaces(): Promise<Either.Type<string, string[]>> {
+    return new Promise(() => {});
+  }
 }

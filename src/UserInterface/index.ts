@@ -1,3 +1,3 @@
-export * from "./ServiceContext";
+export * from "./RouterRepositoryContext";
 export * from "./RootProvider";
 export * from "./GlobalStyle";

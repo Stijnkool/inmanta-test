@@ -7,4 +7,8 @@ export class FailedRouterRepository implements RouterRepository {
   async getRouters(): Promise<Either.Type<string, string[]>> {
     return Either.left(this.errorMessage);
   }
+
+  async getInterfaces(router: string): Promise<Either.Type<string, string[]>> {
+    return Either.left(this.errorMessage);
+  }
 }
