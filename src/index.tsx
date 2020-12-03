@@ -1,12 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import { App } from "App";
-import { store } from "./app/store";
-import { Provider } from "react-redux";
+import { GlobalStyle, RootProvider } from "UserInterface";
 import { RemoteRouterRepository } from "Infrastructure";
 import { ServiceBundle, ServiceContext } from "UserInterface";
-import { initRouters } from "features/routers/routerSlice";
+import { Failed, Loading, RouterProvider } from "UserInterface/components";
 
 const API_URL = "http://0.0.0.0:8080/";
 
@@ -16,13 +13,14 @@ const serviceBundle: ServiceBundle = {
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ServiceContext.Provider value={serviceBundle}>
-        <App />
-      </ServiceContext.Provider>
-    </Provider>
+    <ServiceContext.Provider value={serviceBundle}>
+      <GlobalStyle />
+      <RootProvider
+        Loading={Loading}
+        Failed={Failed}
+        Success={RouterProvider}
+      />
+    </ServiceContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
-
-store.dispatch(initRouters(serviceBundle.routerRepository));

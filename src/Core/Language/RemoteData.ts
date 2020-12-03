@@ -10,6 +10,9 @@ interface NotAsked {
 
 export const notAsked = (): NotAsked => ({ kind: "NotAsked" });
 
+export const isNotAsked = <F, S>(data: RemoteData<F, S>): data is NotAsked =>
+  data.kind === "NotAsked";
+
 interface Loading {
   kind: "Loading";
 }
@@ -43,4 +46,22 @@ export const fromEither = <L, R>(
     return failed(either.value);
   }
   return success(either.value);
+};
+
+export const fold = <F, S, R>(handlers: {
+  notAsked: () => R;
+  loading: () => R;
+  failed: (value: F) => R;
+  success: (value: S) => R;
+}) => (data: RemoteData<F, S>): R => {
+  switch (data.kind) {
+    case "NotAsked":
+      return handlers.notAsked();
+    case "Loading":
+      return handlers.loading();
+    case "Failed":
+      return handlers.failed(data.value);
+    case "Success":
+      return handlers.success(data.value);
+  }
 };

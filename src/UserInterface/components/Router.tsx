@@ -3,11 +3,15 @@ import styled from "styled-components";
 
 interface Props {
   name: string;
+  open: boolean;
   onClick(): void;
 }
 
-export const Router: React.FC<Props> = ({ name, onClick }) => (
-  <Container onClick={onClick}>{name}</Container>
+export const Router: React.FC<Props> = ({ name, open, onClick }) => (
+  <Container onClick={onClick}>
+    {name}
+    <span>{open ? "open" : "closed"}</span>
+  </Container>
 );
 
 const Container = styled.div`
