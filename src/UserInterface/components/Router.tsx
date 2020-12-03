@@ -25,6 +25,7 @@ export const Router: React.FC<Props> = ({
 );
 
 const Container = styled.div`
+  cursor: pointer;
   padding: 16px;
   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 

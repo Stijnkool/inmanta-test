@@ -8,7 +8,7 @@ export const Details: React.FC<Props> = ({ interfaces }) => {
   return (
     <div>
       {interfaces.map((name) => (
-        <p>{name}</p>
+        <p key={name}>{name}</p>
       ))}
     </div>
   );

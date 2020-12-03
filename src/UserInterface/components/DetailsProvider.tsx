@@ -1,5 +1,6 @@
-import { RemoteData } from "Core/Language";
 import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { RemoteData } from "Core/Language";
 import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
 import { Failed } from "./Failed";
 import { Loading } from "./Loading";
@@ -27,10 +28,16 @@ export const DetailsProvider: React.FC<Props> = ({ router, open, Details }) => {
     }
   }, [data, routerRepository, router]);
 
-  return RemoteData.fold<string, string[], JSX.Element | null>({
+  const content = RemoteData.fold<string, string[], JSX.Element | null>({
     notAsked: () => null,
     loading: () => <Loading />,
     failed: (error) => <Failed error={error} />,
     success: (interfaces) => <Details interfaces={interfaces} />,
   })(data);
+
+  return <Container open={open}>{content}</Container>;
 };
+
+const Container = styled.div<{ open: boolean }>`
+  display: ${(p) => (p.open ? "block" : "none")};
+`;

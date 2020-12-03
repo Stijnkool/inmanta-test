@@ -6,9 +6,9 @@ export class RemoteRouterRepository implements RouterRepository {
 
   async getRouters(): Promise<Either.Type<string, string[]>> {
     try {
-      const response = await fetch(this.apiRoot);
+      const response = await fetch(`${this.apiRoot}/`);
       const json = await response.json();
-      return Either.right(json);
+      return Either.right([json[0]]);
     } catch (e) {
       return Either.left(e.message);
     }
@@ -16,7 +16,7 @@ export class RemoteRouterRepository implements RouterRepository {
 
   async getInterfaces(router: string): Promise<Either.Type<string, string[]>> {
     try {
-      const response = await fetch(`${this.apiRoot}/${router}`);
+      const response = await fetch(`${this.apiRoot}/${router}/`);
       const json = await response.json();
       return Either.right(json);
     } catch (e) {

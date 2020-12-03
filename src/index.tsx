@@ -16,6 +16,17 @@ const API_URL = "http://0.0.0.0:8080";
 
 const routerRepository = new RemoteRouterRepository(API_URL);
 
+type RouterType = Parameters<typeof RouterProvider>[0]["Router"];
+
+const RouterInjected: RouterType = (props) => (
+  <Router
+    {...props}
+    DetailsProvider={(props) => (
+      <DetailsProvider {...props} Details={Details} />
+    )}
+  />
+);
+
 ReactDOM.render(
   <React.StrictMode>
     <RouterRepositoryContext.Provider value={routerRepository}>
@@ -24,17 +35,7 @@ ReactDOM.render(
         Loading={Loading}
         Failed={Failed}
         Success={({ routers }) => (
-          <RouterProvider
-            routers={routers}
-            Router={(props) => (
-              <Router
-                {...props}
-                DetailsProvider={(props) => (
-                  <DetailsProvider {...props} Details={Details} />
-                )}
-              />
-            )}
-          />
+          <RouterProvider routers={routers} Router={RouterInjected} />
         )}
       />
     </RouterRepositoryContext.Provider>
