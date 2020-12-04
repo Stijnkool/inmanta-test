@@ -1,4 +1,4 @@
-import { RouterRepository } from "Core";
+import { InterfaceInfo, RouterRepository } from "Core";
 import { Either } from "Core/Language";
 
 export class FailedRouterRepository implements RouterRepository {
@@ -8,7 +8,15 @@ export class FailedRouterRepository implements RouterRepository {
     return Either.left(this.errorMessage);
   }
 
-  async getInterfaces(router: string): Promise<Either.Type<string, string[]>> {
+  async getInterfaces(): Promise<Either.Type<string, string[]>> {
+    return Either.left(this.errorMessage);
+  }
+
+  async getInterfaceInfo(): Promise<Either.Type<string, InterfaceInfo>> {
+    return Either.left(this.errorMessage);
+  }
+
+  async updateInterfaceUp(): Promise<Either.Type<string, InterfaceInfo>> {
     return Either.left(this.errorMessage);
   }
 }

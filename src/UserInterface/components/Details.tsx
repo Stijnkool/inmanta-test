@@ -17,7 +17,7 @@ export const Details: React.FC<Props> = ({ routerId, interfaces }) => {
     success: (interfaces) => (
       <>
         <button>PING</button>
-        <InterfaceList interfaces={interfaces} />
+        <InterfaceList routerId={routerId} />
       </>
     ),
   })(interfaces);

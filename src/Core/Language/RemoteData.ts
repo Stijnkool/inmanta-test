@@ -26,6 +26,9 @@ interface Failed<V> {
 
 export const failed = <V>(value: V): Failed<V> => ({ kind: "Failed", value });
 
+export const isFailed = <F, S>(data: RemoteData<F, S>): data is Failed<F> =>
+  data.kind === "Failed";
+
 interface Success<V> {
   kind: "Success";
   value: V;

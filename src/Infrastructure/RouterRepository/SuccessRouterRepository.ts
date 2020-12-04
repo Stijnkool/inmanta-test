@@ -1,8 +1,12 @@
-import { RouterRepository } from "Core";
+import { InterfaceInfo, RouterRepository } from "Core";
 import { Either } from "Core/Language";
 
 export class SuccessRouterRepository implements RouterRepository {
-  constructor(private routers: string[], private interfaces: string[]) {}
+  constructor(
+    private routers: string[],
+    private interfaces: string[],
+    private interfaceInfo: InterfaceInfo
+  ) {}
 
   async getRouters(): Promise<Either.Type<string, string[]>> {
     return Either.right(this.routers);
@@ -10,5 +14,13 @@ export class SuccessRouterRepository implements RouterRepository {
 
   async getInterfaces(): Promise<Either.Type<string, string[]>> {
     return Either.right(this.interfaces);
+  }
+
+  async getInterfaceInfo(): Promise<Either.Type<string, InterfaceInfo>> {
+    return Either.right(this.interfaceInfo);
+  }
+
+  async updateInterfaceUp(): Promise<Either.Type<string, InterfaceInfo>> {
+    return Either.right(this.interfaceInfo);
   }
 }

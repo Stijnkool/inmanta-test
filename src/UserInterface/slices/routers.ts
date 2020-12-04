@@ -1,7 +1,8 @@
-import { RemoteData } from "Core/Language";
+import { Either, RemoteData } from "Core/Language";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "UserInterface/store";
 import { RouterRepository } from "Core";
+import { getInterfaceInfoForRouter, initInterfaces } from "./interfaces";
 
 export interface Router {
   id: string;
@@ -110,9 +111,18 @@ export const toggleWithFetch = (
   const { value: routers } = data;
   const router = routers[routerId];
 
-  if (!RemoteData.isNotAsked(router.interfaces)) return;
-  const interfaces = await routerRepository.getInterfaces(routerId);
-  dispatch(setInterfaces([routerId, RemoteData.fromEither(interfaces)]));
+  if (RemoteData.isNotAsked(router.interfaces)) {
+    const interfaces = await routerRepository.getInterfaces(routerId);
+    dispatch(setInterfaces([routerId, RemoteData.fromEither(interfaces)]));
+    if (Either.isRight(interfaces)) {
+      dispatch(initInterfaces([routerId, interfaces.value]));
+      dispatch(getInterfaceInfoForRouter(routerRepository, routerId));
+    }
+  }
+
+  if (RemoteData.isSuccess(router.interfaces)) {
+    dispatch(getInterfaceInfoForRouter(routerRepository, routerId));
+  }
 };
 
 export const openAllWithFetch = (

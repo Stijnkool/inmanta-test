@@ -72,7 +72,8 @@ it("renders Failed", async () => {
 });
 
 it("renders Success", async () => {
-  const routerRepo = new SuccessRouterRepository(["cloud1"], ["eth0"]);
+  const info = { up: false, mtu: 1600, address: [] };
+  const routerRepo = new SuccessRouterRepository(["cloud1"], ["eth0"], info);
   store.dispatch(initRouters(routerRepo));
 
   await act(async () => {
