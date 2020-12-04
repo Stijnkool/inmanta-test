@@ -44,7 +44,7 @@ Make sure you have that running. (See https://github.com/inmanta/nfv-test-api)
 
 You need `nodejs` & `npm` installed to run this project.
 
-This project has been developer on node version `v12.20.0`.
+This project has been developed on node version `v12.20.0`.
 This project will run on most node versions.  
 But if you run into problems, maybe try that version.
 
@@ -66,5 +66,5 @@ It also verifies that the basic api data works (mocked).
 |             | 1   | 2   | 3   | 4   | 5   | 6   | 7   |
 | ----------- | --- | --- | --- | --- | --- | --- | --- |
 | wireframes  | yes | yes | yes | yes | -   | yes | -   |
-| design      |     |     |     |     |     |     |     |
+| design      | yes | yes | yes | -   | -   | -   | -   |
 | development | yes | yes | yes | -   | -   | -   | -   |
