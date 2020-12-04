@@ -20,6 +20,10 @@ Basic wireframes can be found in the `/wireframes` folder.
 
 ## Designs
 
+Basic designs can be found in the `/designs` folder.
+
+- `base-view.pdf`
+
 ## Development
 
 Since this project is developed as a proof of concept, certain features are not implemented.
