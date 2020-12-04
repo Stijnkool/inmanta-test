@@ -73,7 +73,7 @@ It also verifies that the basic api data works (mocked).
 
 ## Docs
 
-In the `/docs` folder you can find a basic explanation of the folder structure and what files to what.
+In the `/docs` folder you can find a basic explanation of the folder structure and what files do what.
 
 ## Time Log
 
