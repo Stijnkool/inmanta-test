@@ -33,12 +33,7 @@ export const Router: React.FC<Props> = ({ router }) => {
 };
 
 const Container = styled.div`
-  padding: 16px;
-  border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-
-  :last-child {
-    border-bottom: none;
-  }
+  border-top: 1px solid rgba(200, 200, 200, 0.5);
 `;
 
 const Title = styled.span`
@@ -47,13 +42,13 @@ const Title = styled.span`
 `;
 
 const TitleBar = styled.div`
+  padding: 16px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
-  padding-bottom: 8px;
 `;
 
-const Toggle = styled.button`
+const Toggle = styled.span`
   width: 16px;
   border: none;
   font-size: 18px;
