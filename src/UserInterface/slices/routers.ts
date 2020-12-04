@@ -111,17 +111,20 @@ export const toggleWithFetch = (
   const { value: routers } = data;
   const router = routers[routerId];
 
-  if (RemoteData.isNotAsked(router.interfaces)) {
-    const interfaces = await routerRepository.getInterfaces(routerId);
-    dispatch(setInterfaces([routerId, RemoteData.fromEither(interfaces)]));
-    if (Either.isRight(interfaces)) {
-      dispatch(initInterfaces([routerId, interfaces.value]));
-      dispatch(getInterfaceInfoForRouter(routerRepository, routerId));
-    }
-  }
+  dispatch(handleRouterData(routerRepository, router));
+};
 
-  if (RemoteData.isSuccess(router.interfaces)) {
-    dispatch(getInterfaceInfoForRouter(routerRepository, routerId));
+export const handleRouterData = (
+  routerRepository: RouterRepository,
+  router: Router
+): AppThunk => async (dispatch, getState) => {
+  if (RemoteData.isNotAsked(router.interfaces)) {
+    const interfaces = await routerRepository.getInterfaces(router.id);
+    dispatch(setInterfaces([router.id, RemoteData.fromEither(interfaces)]));
+    if (Either.isRight(interfaces)) {
+      dispatch(initInterfaces([router.id, interfaces.value]));
+      dispatch(getInterfaceInfoForRouter(routerRepository, router.id));
+    }
   }
 };
 
@@ -132,9 +135,8 @@ export const openAllWithFetch = (
   const { data } = getState().routers;
   if (!RemoteData.isSuccess(data)) return;
   const { value: routers } = data;
+
   Object.values(routers).forEach(async (router) => {
-    if (!RemoteData.isNotAsked(router.interfaces)) return;
-    const interfaces = await routerRepository.getInterfaces(router.id);
-    dispatch(setInterfaces([router.id, RemoteData.fromEither(interfaces)]));
+    dispatch(handleRouterData(routerRepository, router));
   });
 };
