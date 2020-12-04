@@ -1,14 +1,8 @@
 import { Either, RemoteData } from "Core/Language";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk, RootState } from "UserInterface/store";
-import { RouterRepository } from "Core";
+import { AppThunk, RootState } from "UserInterface/setup/store";
+import { RouterRepository, Router } from "Core";
 import { getInterfaceInfoForRouter, initInterfaces } from "./interfaces";
-
-export interface Router {
-  id: string;
-  open: boolean;
-  interfaces: RemoteData.Type<string, string[]>;
-}
 
 export type Routers = Record<string, Router>;
 

@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 import ReactDOM, { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { Root, RouterRepositoryContext, store } from "UserInterface";
-import { initRouters } from "./slices";
+import { initRouters } from "../slices";
 
 let container: any = null;
 

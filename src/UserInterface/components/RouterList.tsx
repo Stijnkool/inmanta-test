@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
 import {
+  useAppDispatch,
   closeAll,
   openAllWithFetch,
-  Router as RouterType,
-} from "UserInterface/slices";
-import { useAppDispatch } from "UserInterface/store";
+  RouterRepositoryContext,
+} from "UserInterface";
 import { Router } from "./Router";
 import { Button } from "./Button";
+import { Router as RouterType } from "Core";
 
 interface Props {
   routers: RouterType[];

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors } from "UserInterface/colors";
+import { colors } from "UserInterface/styles/colors";
 
 interface Props {
   small?: boolean;

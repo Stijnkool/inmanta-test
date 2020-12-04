@@ -36,6 +36,7 @@ Not implemented:
 - full test coverage
 - clean software architecture
 - animations
+- ENV variables
 
 ### How to run the application
 
@@ -68,3 +69,24 @@ It also verifies that the basic api data works (mocked).
 | wireframes  | yes | yes | yes | yes | -   | yes | -   |
 | design      | yes | yes | yes | -   | -   | -   | -   |
 | development | yes | yes | yes | -   | -   | -   | -   |
+
+## Docs
+
+In the `/docs` folder you can find a basic explanation of the folder structure and what files to what.
+
+## Time Log
+
+1. Process assignment & plan next steps
+   - 0.5h
+1. Install API & Test API with POSTMAN & Read API docs
+   - 1.5h
+1. Analyse user stories & create Wireframes
+   - 3.5h
+1. Design
+   - 3h
+1. Setup for development (git repo, CreateReactApp, simple API request)
+   - 2h
+1. Development
+   - 10hours
+
+Total hours spent: 20.5h

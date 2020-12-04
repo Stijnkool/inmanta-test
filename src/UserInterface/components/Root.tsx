@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { RemoteData } from "Core/Language";
+import { RemoteData, Router } from "Core";
 import { useSelector } from "react-redux";
-import { Router, selectRouterList } from "./slices";
-import { Loading, Failed, RouterList } from "./components";
+import { selectRouterList } from "../slices";
+import { Loading, Failed, RouterList } from ".";
 
 export const Root: React.FC = () => {
   const data = useSelector(selectRouterList);

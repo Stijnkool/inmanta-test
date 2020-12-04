@@ -1,15 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import {
   GlobalStyle,
   Root,
   RouterRepositoryContext,
   store,
+  initRouters,
 } from "UserInterface";
 import "./normalize.css";
 import { RemoteRouterRepository } from "Infrastructure";
-import { Provider } from "react-redux";
-import { initRouters } from "UserInterface/slices";
 
 const API_URL = "http://0.0.0.0:8080";
 

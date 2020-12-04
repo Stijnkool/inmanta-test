@@ -1,9 +1,11 @@
 import React, { useCallback, useContext } from "react";
 import styled from "styled-components";
-import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
-import { toggleWithFetch } from "UserInterface/slices";
-import { useAppDispatch } from "UserInterface/store";
-import { Router as RouterType } from "UserInterface/slices";
+import {
+  useAppDispatch,
+  toggleWithFetch,
+  RouterRepositoryContext,
+} from "UserInterface";
+import { Router as RouterType } from "Core";
 import { Details } from "./Details";
 
 interface Props {

@@ -1,13 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { RemoteData } from "Core/Language";
-import {
-  Interface as InterfaceType,
-  toggleInterface,
-} from "UserInterface/slices";
-import { useAppDispatch } from "UserInterface/store";
-import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
-import { InterfaceInfo } from "Core";
+import { toggleInterface } from "UserInterface/slices";
+import { useAppDispatch } from "UserInterface/setup/store";
+import { RouterRepositoryContext } from "UserInterface/setup/RouterRepositoryContext";
+import { InterfaceInfo, Interface as InterfaceType } from "Core";
 import { Button } from "./Button";
 
 interface Props {

@@ -1,5 +1,5 @@
 import { Either } from "Core/Language";
-import { InterfaceInfo } from "./InterfaceInfo";
+import { InterfaceInfo } from "./domain";
 
 export interface RouterRepository {
   getRouters(): Promise<Either.Type<string, string[]>>;

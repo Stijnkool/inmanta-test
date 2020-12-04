@@ -1,12 +1,7 @@
 import { RemoteData } from "Core/Language";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, RootState } from "UserInterface";
-import { InterfaceInfo, RouterRepository } from "Core";
-
-export interface Interface {
-  id: string;
-  info: RemoteData.Type<string, InterfaceInfo>;
-}
+import { Interface, InterfaceInfo, RouterRepository } from "Core";
 
 interface InterfacesState {
   byId: Record<string, Interface>;
