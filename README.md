@@ -47,7 +47,8 @@ You need `nodejs` & `npm` installed to run this project.
 
 This project has been developed on node version `v12.20.0`.
 This project will run on most node versions.  
-But if you run into problems, maybe try that version.
+But if you run into problems, maybe try that version.  
+In the project root:
 
 1. Install dependencies by running `npm install`
 2. Start the local web server by running `npm start`
