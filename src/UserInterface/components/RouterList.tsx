@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { colors } from "UserInterface/colors";
 import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
 import {
   closeAll,
@@ -9,6 +8,7 @@ import {
 } from "UserInterface/slices";
 import { useAppDispatch } from "UserInterface/store";
 import { Router } from "./Router";
+import { Button } from "./Button";
 
 interface Props {
   routers: RouterType[];
@@ -21,10 +21,14 @@ export const RouterList: React.FC<Props> = ({ routers }) => {
   return (
     <Container>
       <Options>
-        <Button onClick={() => dispatch(openAllWithFetch(routerRepository))}>
+        <StyledButton
+          onClick={() => dispatch(openAllWithFetch(routerRepository))}
+        >
           Open All
-        </Button>
-        <Button onClick={() => dispatch(closeAll())}>Close All</Button>
+        </StyledButton>
+        <StyledButton onClick={() => dispatch(closeAll())}>
+          Close All
+        </StyledButton>
       </Options>
 
       {routers.map((router) => (
@@ -47,18 +51,6 @@ const Options = styled.div`
   padding: 16px;
 `;
 
-const Button = styled.button`
-  cursor: pointer;
-  padding: 8px;
+const StyledButton = styled(Button)`
   margin: 0 8px;
-  background: none;
-  border: 1px solid ${colors.primaryLight};
-  color: ${colors.primaryLight};
-  border-radius: 2px;
-  outline: none;
-
-  &:hover {
-    border-color: ${colors.primary};
-    color: ${colors.primary};
-  }
 `;

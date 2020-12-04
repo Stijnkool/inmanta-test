@@ -4,6 +4,7 @@ import { RemoteData } from "Core/Language";
 import { Failed } from "./Failed";
 import { Loading } from "./Loading";
 import { InterfaceList } from "./InterfaceList";
+import { Button } from "./Button";
 
 interface Props {
   routerId: string;
@@ -17,7 +18,9 @@ export const Details: React.FC<Props> = ({ routerId, interfaces }) => {
     failed: (error) => <Failed error={error} />,
     success: (interfaces) => (
       <>
-        <button>PING</button>
+        <PingBar>
+          <Button small>PING</Button>
+        </PingBar>
         <InterfaceList routerId={routerId} />
       </>
     ),
@@ -27,5 +30,10 @@ export const Details: React.FC<Props> = ({ routerId, interfaces }) => {
 };
 
 const Container = styled.div`
-  padding: 8px 16px 16px;
+  padding: 0 16px 16px;
+`;
+
+const PingBar = styled.div`
+  display: flex;
+  justify-content: center;
 `;

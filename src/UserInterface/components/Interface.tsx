@@ -8,6 +8,7 @@ import {
 import { useAppDispatch } from "UserInterface/store";
 import { RouterRepositoryContext } from "UserInterface/RouterRepositoryContext";
 import { InterfaceInfo } from "Core";
+import { Button } from "./Button";
 
 interface Props {
   data: InterfaceType;
@@ -19,18 +20,30 @@ export const Interface: React.FC<Props> = ({ data, routerId }) => {
   const routerRepository = useContext(RouterRepositoryContext);
 
   return (
-    <div>
-      {RemoteData.isFailed(data.info) && "!!"}
-      <span>{data.id}</span>
+    <Container>
+      <Title>
+        {RemoteData.isFailed(data.info) && "!!"} {data.id}
+      </Title>
       <UpButton
         data={data}
         cb={() =>
           dispatch(toggleInterface(routerRepository, routerId, data.id))
         }
       />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+`;
+
+const Title = styled.span`
+  align-self: center;
+  font-size: 16px;
+`;
 
 interface UpButtonProps {
   data: InterfaceType;
@@ -40,10 +53,12 @@ interface UpButtonProps {
 const UpButton: React.FC<UpButtonProps> = ({ data, cb }) => {
   return RemoteData.fold<string, InterfaceInfo, JSX.Element | null>({
     notAsked: () => null,
-    loading: () => <Button>...</Button>,
+    loading: () => <Button small>...</Button>,
     failed: () => null,
-    success: ({ up }) => <Button onClick={cb}>{up ? "UP" : "DOWN"}</Button>,
+    success: ({ up }) => (
+      <Button small onClick={cb}>
+        {up ? "UP" : "DOWN"}
+      </Button>
+    ),
   })(data.info);
 };
-
-const Button = styled.button``;
