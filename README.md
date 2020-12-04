@@ -31,6 +31,7 @@ Not implemented:
 - keyboard support
 - full test coverage
 - clean software architecture
+- animations
 
 ### How to run the application
 
@@ -55,3 +56,11 @@ To execute the tests, run `npm test`.
 This runs only 1 test for the root component.
 This test makes sure the root component doesn't crash.
 It also verifies that the basic api data works (mocked).
+
+## User Stories
+
+|             | 1   | 2   | 3   | 4   | 5   | 6   | 7   |
+| ----------- | --- | --- | --- | --- | --- | --- | --- |
+| wireframes  | yes | yes | yes | yes | -   | yes | -   |
+| design      |     |     |     |     |     |     |     |
+| development | yes | yes | yes | -   | -   | -   | -   |
